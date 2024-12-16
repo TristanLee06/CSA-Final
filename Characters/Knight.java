@@ -3,6 +3,11 @@ import java.util.HashMap;
 public class Knight extends Character {
     private int armor; 
     // Array will be [Durability, Damage]
+    //Reasoning for hashmap: hashmap is the only way that I can allow my code to set specific values for types of items. for example,
+    // a wooden sword has a damage value of 5, however this labeling is only possible by linking the values through a hashmap.
+    //Now, to address this "int[]", it's crucial to include! why? well, i'm going insane rn since it's 1am, but basically I kind of needed this
+    //because the sword has an associated durability and damage. To link these together an array is necessary. Position index 0 is durability
+    // while position index 1 is the damage of the sword. 
     private HashMap<String, int[]> sword = new HashMap<>();
     private HashMap<String, Integer> shield = new HashMap<>();
     private String swordType;
