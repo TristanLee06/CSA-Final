@@ -1,11 +1,11 @@
 import java.util.HashMap;
 
 public class Character {
-    private String name;
-    private int health;
-    private int strength;
-    private int level;
-    private HashMap<String, String> inventory = new HashMap<>();
+    protected String name;
+    protected int health;
+    protected int strength;
+    protected int level;
+    protected HashMap<String, String> inventory = new HashMap<>();
 
     public int multiplier(int attack) {
         return (int)Math.round(attack*(1+(0.2)*(strength-1)));
@@ -35,9 +35,10 @@ public class Character {
     }
     
     // Constructor
-    public Character(String name, int health) {
+    public Character(String name, int health, int strength) {
         this.name = name;
         this.health = health;
+        this.strength = strength;
         inventory.put("weapon", null);
         inventory.put("shield", null);
         inventory.put("misc", null);
@@ -75,8 +76,12 @@ public class Character {
         this.level = level;
     }
 
+    @Override
     public String toString() {
-        return 
+        return "name: " + this.name+"\n" + 
+        "health: " + this.health+"\n" +
+        "strength: " + this.strength+"\n" +
+        "level: " + this.level;
     }
 }
 

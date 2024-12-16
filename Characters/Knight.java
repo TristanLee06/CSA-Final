@@ -1,15 +1,16 @@
 import java.util.HashMap;
-import java.util.List;
 
 public class Knight extends Character {
     private int armor; 
     // Array will be [Durability, Damage]
     private HashMap<String, int[]> sword = new HashMap<>();
     private HashMap<String, Integer> shield = new HashMap<>();
+    private String swordType;
 
-    public Knight(String name, int health, int armor, String swordType, String shieldType) {
-        super(name, health);
+    public Knight(String name, int health, int strength, int armor, String swordType, String shieldType) {
+        super(name, health, strength);
         this.armor = armor;
+        this.swordType = swordType;
 
         shieldType = shieldType.toLowerCase();
         swordType = swordType.toLowerCase();
@@ -55,35 +56,75 @@ public class Knight extends Character {
             // idk yet
         }
     }
+
+    public int getArmor() {
+        return this.armor;
+    }
+
+    public String getSwordType() {
+        return this.swordType;
+    }
+
     public void parryAttack(Character player) {
         if (this.sword.keySet().toArray()[0].equals("obsidian")) {
-            player.setHealth(player.getHealth()-this.sword.get("obsidian")[1]);
+            player.setHealth(player.getHealth()-(int)(this.sword.get("obsidian")[1]*(1.0+0.1*this.strength)));
             int[] array = {this.sword.get("obsidian")[0]-1, this.sword.get("obsidian")[1]};
             this.sword.put("obsidian", array);
         }
         if (this.sword.keySet().toArray()[0].equals("diamond")) {
-            player.setHealth(player.getHealth()-this.sword.get("diamond")[1]);
+            player.setHealth(player.getHealth()-(int)(this.sword.get("diamond")[1]*(1.0+0.1*this.strength)));
             int[] array = {this.sword.get("diamond")[0]-1, this.sword.get("diamond")[1]};
             this.sword.put("diamond", array);
         }
         if (this.sword.keySet().toArray()[0].equals("iron")) {
-            player.setHealth(player.getHealth()-this.sword.get("iron")[1]);
+            player.setHealth(player.getHealth()-(int)(this.sword.get("iron")[1]*(1.0+0.1*this.strength)));
             int[] array = {this.sword.get("iron")[0]-1, this.sword.get("iron")[1]};
             this.sword.put("iron", array);
         }
         if (this.sword.keySet().toArray()[0].equals("stone")) {
-            player.setHealth(player.getHealth()-this.sword.get("stone")[1]);
+            player.setHealth(player.getHealth()-(int)(this.sword.get("stone")[1]*(1.0+0.1*this.strength)));
             int[] array = {this.sword.get("stone")[0]-1, this.sword.get("stone")[1]};
             this.sword.put("stone", array);
         }
         if (this.sword.keySet().toArray()[0].equals("wooden")) {
-            player.setHealth(player.getHealth()-this.sword.get("wooden")[1]);
+            player.setHealth(player.getHealth()-(int)(this.sword.get("wooden")[1]*(1.0+0.1*this.strength)));
             int[] array = {this.sword.get("wooden")[0]-1, this.sword.get("wooden")[1]};
             this.sword.put("wooden", array);
         }
     }
 
+    public int attackDragon(int dragon) {
+        if (this.sword.keySet().toArray()[0].equals("obsidian")) {
+            dragon-= (int)(this.sword.get("obsidian")[1]*(1.0+0.1*this.strength));
+            int[] array = {this.sword.get("obsidian")[0]-1, this.sword.get("obsidian")[1]};
+            this.sword.put("obsidian", array);
+        }
+        if (this.sword.keySet().toArray()[0].equals("diamond")) {
+            dragon -= (int)(this.sword.get("diamond")[1]*(1.0+0.1*this.strength));
+            int[] array = {this.sword.get("diamond")[0]-1, this.sword.get("diamond")[1]};
+            this.sword.put("diamond", array);
+        }
+        if (this.sword.keySet().toArray()[0].equals("iron")) {
+            dragon -= (int)(this.sword.get("iron")[1]*(1.0+0.1*this.strength));
+            int[] array = {this.sword.get("iron")[0]-1, this.sword.get("iron")[1]};
+            this.sword.put("iron", array);
+        }
+        if (this.sword.keySet().toArray()[0].equals("stone")) {
+            dragon -= (int)(this.sword.get("stone")[1]*(1.0+0.1*this.strength));
+            int[] array = {this.sword.get("stone")[0]-1, this.sword.get("stone")[1]};
+            this.sword.put("stone", array);
+        }
+        if (this.sword.keySet().toArray()[0].equals("wooden")) {
+            dragon -= (int)(this.sword.get("wooden")[1]*(1.0+0.1*this.strength));
+            int[] array = {this.sword.get("wooden")[0]-1, this.sword.get("wooden")[1]};
+            this.sword.put("wooden", array);
+        }
+        return dragon;
+    }
+
+    @Override
     public String toString() {
-        return "Armor: " + this.armor + " Sword Type: " + this.swordType;
+        return super.toString() + '\n' +
+        "Armor: " + this.armor + '\n' + " Sword Type: " + this.swordType;
     }
 }
